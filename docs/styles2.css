@@ -13,18 +13,17 @@ body{
     position: relative;
     min-height: 100vh;
 }
-
 .navbar{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo img{
-  height:85px;
+  height: clamp(45px, 8vw, 85px);
   margin-left: 35px;
-
 }
 
 .navbar ul{
@@ -35,21 +34,17 @@ body{
   padding-top: 25px;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .navbar a{
   text-decoration: none;
   color: white;
-  font-size: 2em;
+  font-size: clamp(1em, 2.5vw, 2em);
   font-family: "Poppins", sans-serif;
   font-weight: 350;
+  white-space: nowrap;
 }
-
-.nav-right-group a{
-  margin-left: 45px;
-  font-family: "Poppins", sans-serif;
-}
-
 .nav-right-group a:hover{
   background: linear-gradient(90deg, #6876DF 0%, #B070FF 100%);
   background-clip: text;
@@ -59,11 +54,15 @@ body{
   font-weight: 350;
 
 }
-.nav-right-group{
-  padding-right: 50px;
-  margin-top: -10px;
+.nav-right-group a{
+  margin-left: clamp(15px, 3vw, 45px);
+  font-family: "Poppins", sans-serif;
 }
 
+.nav-right-group{
+  padding-right: clamp(15px, 4vw, 50px);
+  margin-top: -10px;
+}
 
 .dashboard{
     display: grid;
@@ -71,14 +70,17 @@ body{
     grid-template-rows: 1fr 1fr;
     gap: 35px;
     padding-top: 160px;
-    height: 100vh;
     box-sizing: border-box;
     padding-bottom: 50px;
-    
+    padding-left: 20px;
+    padding-right: 20px;
+
+    height: 100vh;
+
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
 }
-
 
 .bulb{
     grid-column: 2;
@@ -90,7 +92,7 @@ body{
     border: 2px solid #6F87A7;
     border-radius: 12px;
     padding: 10px;
-   
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,11 +103,11 @@ body{
     color: #cfd8e3;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
-    font-size: 1.8em;
+    font-size: clamp(1.1em, 2vw, 1.8em);
     margin: 0 0 15px 0;
 }
 .value{
-    font-size: 7em;
+    font-size: clamp(2.5em, 6vw, 7em);
     font-weight: 600;
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -117,19 +119,41 @@ body{
     -webkit-text-fill-color: transparent;
 }
 
+.bulb img{
+    max-width: 100%;
+    height: auto;
+    max-height: 60vh;
+}
+
 .chart-card{
     border: 1px solid #6F87A7;
     border-radius: 12px;
     padding: 30px;
     padding-top: 40px;
     background: #072d4e6a;
-    width: 80vw;
-    height: 80vh;
+    width: 90vw;
+    max-width: 1200px;
+    height: 60vh;
     margin: 40px auto;
+    box-sizing: border-box;
 }
 
 .graph1{
-  height: 100vh;
+  min-height: auto;
+}
+
+/* Stack to one column on narrower screens */
+@media (max-width: 850px){
+    .dashboard{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+        padding-top: 120px;
+    }
+    .bulb{
+        grid-column: 1;
+        grid-row: auto;
+    }
 }
 
 .roboto-slab-<uniquifier> {
