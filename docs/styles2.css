@@ -19,6 +19,17 @@ body{
   left: 0;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 25px;
+}
+
+.nav-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .logo img{
@@ -26,44 +37,69 @@ body{
   margin-left: 35px;
 }
 
-.navbar ul{
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  padding-top: 25px;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.nav-toggle{
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+  padding: 0 20px;
 }
 
-.navbar a{
+.nav-right-group{
+  display: flex;
+  align-items: center;
+  padding-right: clamp(15px, 4vw, 50px);
+  margin-top: -10px;
+}
+
+.nav-right-group a{
   text-decoration: none;
   color: white;
   font-size: clamp(1em, 2.5vw, 2em);
   font-family: "Poppins", sans-serif;
   font-weight: 350;
   white-space: nowrap;
+  margin-left: clamp(15px, 3vw, 45px);
 }
+
 .nav-right-group a:hover{
   background: linear-gradient(90deg, #6876DF 0%, #B070FF 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  font-weight: 350;
-
-}
-.nav-right-group a{
-  margin-left: clamp(15px, 3vw, 45px);
-  font-family: "Poppins", sans-serif;
 }
 
-.nav-right-group{
-  padding-right: clamp(15px, 4vw, 50px);
-  margin-top: -10px;
-}
+@media (max-width: 700px){
+    .navbar{
+        flex-wrap: wrap;
+    }
 
+    .nav-toggle{
+        display: block;
+    }
+
+    .nav-right-group{
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 20px 0;
+        margin-top: 15px;
+        row-gap: 15px;
+    }
+
+    .nav-right-group.nav-open{
+        display: flex;
+    }
+
+    .nav-right-group a{
+        margin-left: 0;
+        text-align: center;
+    }
+}
 .dashboard{
     display: grid;
     grid-template-columns: 1.3fr 1fr;
@@ -142,6 +178,29 @@ body{
   min-height: auto;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
+/* Stack navbar cleanly on narrow screens, right-aligned */
+@media (max-width: 480px){
+    .navbar ul{
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 15px;
+    }
+    .nav-right-group{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 25px;
+        margin-top: 10px;
+    }
+    .nav-right-group a{
+        margin-left: 25px;
+    }
+}
+
 /* Stack to one column on narrower screens */
 @media (max-width: 850px){
     .dashboard{
@@ -155,6 +214,66 @@ body{
         grid-row: auto;
     }
 }
+
+.navbar ul{
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 25px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;      /* always allow wrapping, not just under 480px */
+  row-gap: 10px;
+}
+
+.nav-right-group{
+  padding-right: clamp(15px, 4vw, 50px);
+  margin-top: -10px;
+  flex-shrink: 0;        /* prevents it being squeezed/pushed off-edge */
+}
+
+
+/* Raise this breakpoint from 480px to cover resized desktop windows too */
+.nav-toggle{
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #f5f6f8;
+    cursor: pointer;
+    padding: 0 20px;
+}
+
+@media (max-width: 700px){
+    .nav-toggle{
+        display: block;
+    }
+
+    .nav-right-group{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background: #2a3b53;
+        padding: 20px 0;
+        margin-top: 15px;
+        row-gap: 15px;
+    }
+
+    .nav-right-group.nav-open{
+        display: flex;
+    }
+
+    .nav-right-group a{
+        margin-left: 0;
+    }
+
+    .navbar ul{
+        flex-wrap: wrap;
+    }
+}
+
 
 .roboto-slab-<uniquifier> {
   font-family: "Roboto Slab", serif;
