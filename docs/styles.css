@@ -1,0 +1,265 @@
+.title{
+    font-size: 13em;
+    font-family: "Allison";
+    color: #2F3455;
+
+    text-shadow: 0px 4px 5.8px rgba(0, 27, 75, 0.67);
+}
+
+body{
+    background-attachment: fixed;
+    background-image: url("bg.png");
+    background-size: cover;
+    background-position: center bottom;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+.navbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.logo img{
+  height:85px;
+  margin-left: 35px;
+
+}
+
+.navbar ul{
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 25px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar a{
+  text-decoration: none;
+  color: black;
+  font-size: 2em;
+  font-family: "Poppins", sans-serif;
+  font-weight: 350;
+}
+
+.nav-right-group a{
+  margin-left: 45px;
+  font-family: "Poppins", sans-serif;
+}
+
+.nav-right-group a:hover{
+  background: linear-gradient(90deg, #000A5A 0%, #58577D 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-weight: 350;
+
+}
+.nav-right-group{
+  padding-right: 50px;
+  margin-top: -10px;
+}
+
+
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 90px); /* adjust 90px to your navbar height */
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 48px 56px;
+    width: 380px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.login-card h1 {
+    color: #2b7a9e;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 450;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    color: #444;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.login-card input {
+    width: 100%;
+    height: 42px;
+    background: #92c5d8;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 24px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+.login-card input:focus {
+    outline: 2px solid #2b7a9e;
+}
+
+.login-btn {
+    display: block;
+    margin: 8px auto 0;
+    padding: 10px 32px;
+    background: #92c5d8;
+    color: #2b7a9e;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #7fb8cf;
+}
+
+
+
+.roboto-slab-<uniquifier> {
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+.allison-regular {
+  font-family: "Allison", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
