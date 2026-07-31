@@ -23,6 +23,10 @@ body{
     overflow-x: hidden;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 .navbar{
     position: absolute;
     top: 0;
@@ -45,6 +49,7 @@ body{
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  row-gap: 10px;
 }
 
 .navbar a{
@@ -64,7 +69,9 @@ body{
 .nav-right-group{
   padding-right: clamp(15px, 4vw, 50px);
   margin-top: -10px;
+  flex-shrink: 0;
 }
+
 .nav-right-group a:hover{
   background: linear-gradient(90deg, #000A5A 0%, #58577D 100%);
   background-clip: text;
@@ -72,14 +79,47 @@ body{
   color: transparent;
   -webkit-text-fill-color: transparent;
   font-weight: 350;
-
-}
-.nav-right-group{
-  padding-right: 50px;
-  margin-top: -10px;
 }
 
+/* --- Vertical navbar on narrow screens --- */
+.nav-toggle{
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #2F3455;
+    cursor: pointer;
+    padding: 0 20px;
+}
 
+@media (max-width: 700px){
+    .nav-toggle{
+        display: block;
+    }
+
+    .nav-right-group{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background: rgba(255,255,255,0.85);
+        padding: 20px 0;
+        margin-top: 15px;
+        row-gap: 15px;
+    }
+
+    .nav-right-group.nav-open{
+        display: flex;
+    }
+
+    .nav-right-group a{
+        margin-left: 0;
+    }
+
+    .navbar ul{
+        flex-wrap: wrap;
+    }
+}
 
 .login-wrapper {
     display: flex;
@@ -91,8 +131,9 @@ body{
 .login-card {
     background: #ffffff;
     border-radius: 16px;
-    padding: 48px 56px;
-    width: 380px;
+    padding: 40px 32px;
+    width: min(380px, 88vw);
+    box-sizing: border-box;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
@@ -100,10 +141,9 @@ body{
 .login-card h1 {
     color: #2b7a9e;
     font-size: 2.2rem;
-    font-weight: 600;
+    font-weight: 450;
     margin-bottom: 32px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 450;
 }
 
 .login-card label {
@@ -150,8 +190,6 @@ body{
 .login-btn:hover {
     background: #7fb8cf;
 }
-
-
 
 .roboto-slab-<uniquifier> {
   font-family: "Roboto Slab", serif;
