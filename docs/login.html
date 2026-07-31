@@ -21,7 +21,8 @@
     <div class="navbar">
         <ul>
             <li><a href="index.html"><div class="logo"><img src="FogFarm.png"></div></a></li>
-            <li class="nav-right-group">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+            <li class="nav-right-group" id="navLinks">
                 <a href="login.html">Farms</a>
                 <a href="login.html">Log in</a>
             </li>
@@ -43,6 +44,12 @@
     </div>   
 
     <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-open');
+        });
+
         document.querySelector('.login-btn').addEventListener('click', function(e) {
             e.preventDefault();
 
