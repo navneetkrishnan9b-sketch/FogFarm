@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero</title>
+    <link rel="stylesheet" href="styles2.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allison&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html"><div class="logo"><img src="FogFarm2.png"></div></a></li>
+            <li class="nav-right-group">
+                <a href="login.html">Farms</a>
+                <a href="login.html">Log in</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="dashboard">
+        <div class="card humidity">
+            <h2>Humidity</h2>
+            <p class="value" id="hum">80%</p>
+        </div>
+        <div class="card temperature">
+            <h2>Temperature</h2>
+            <p class="value" id="temp">28°C</p>
+        </div>
+        <div class="card bulb">
+            <img id="bulbImg" src="bulb.png" style="height: 600px;padding-right: 15px;">
+        </div>
+    </div>
+
+    <div class="graph1">
+        <div class="chart-card">
+            <canvas id="weeklyChart"></canvas>
+        </div>
+    </div>
+    <div class="graph1">
+        <div class="chart-card">
+            <canvas id="humidityChart"></canvas>
+        </div>
+    </div>
+
+<script>
+    async function loadChart(){
+        const channelID = "3407575";
+        const apiKey = "I8Y3MP890VBK6PAV"; // remove this line + param below if channel is public
+        const fieldNum = 2; // change to match your field
+
+        const response = await fetch(`https://api.thingspeak.com/channels/${channelID}/feeds.json?api_key=${apiKey}&results=3000`);
+        const data = await response.json();
+
+        // find the last valid temperature reading and show it in the card
+        let latestTemp = null;
+        for (let i = data.feeds.length - 1; i >= 0; i--) {
+            const v = parseFloat(data.feeds[i][`field${fieldNum}`]);
+            if (!isNaN(v) && v >= 23 && v <= 38) {
+                latestTemp = v;
+                break;
+            }
+        }
+        if (latestTemp !== null) {
+            document.getElementById('temp').textContent = `${latestTemp.toFixed(0)}°C`;
+        }
+
+        const labels = data.feeds.map(entry => {
+            const date = new Date(entry.created_at);
+            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        });
+
+        const rawValues = data.feeds.map(entry => parseFloat(entry[`field${fieldNum}`]));
+
+        // Filter out unrealistic readings (adjust range to your sensor's realistic bounds)
+        const values = rawValues.map(v => (v < 23 || v > 38 || isNaN(v)) ? null : v);
+
+        
+        const ctx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+            datasets: [{
+                data: values,
+                spanGaps: true,
+                borderColor: '#4a9eff',
+                backgroundColor: 'transparent',
+                pointBackgroundColor: '#4a9eff',
+                pointRadius: 0.8,
+                tension: 3,
+                borderWidth: 1
+            }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.15)' },
+                        ticks: { 
+                            color: '#8a9bb0',
+                            maxTicksLimit: 15,
+                            autoSkip: true
+                        }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.15)' },
+                        ticks: { color: '#8a9bb0' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Temperature',
+                        color: '#cfd8e3',
+                        font: {
+                            size: 20,
+                            family: "'Poppins', sans-serif",
+                            weight: '500'
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    }
+                },
+            }
+        });
+    }
+
+    loadChart();
+
+    async function loadHumidityChart(){
+        const channelID = "3407575";
+        const apiKey = "I8Y3MP890VBK6PAV";
+        const fieldNum = 1; // change to whichever field is Humidity
+
+        const response = await fetch(`https://api.thingspeak.com/channels/${channelID}/feeds.json?api_key=${apiKey}&results=3000`);
+        const data = await response.json();
+
+        // find the last valid humidity reading and show it in the card
+        let latestHumidity = null;
+        for (let i = data.feeds.length - 1; i >= 0; i--) {
+            const v = parseFloat(data.feeds[i][`field${fieldNum}`]);
+            if (!isNaN(v) && v >= 0 && v <= 100) {
+                latestHumidity = v;
+                break;
+            }
+        }
+        if (latestHumidity !== null) {
+            document.getElementById('hum').textContent = `${latestHumidity.toFixed(0)}%`;
+        }
+
+        const labels = data.feeds.map(entry => {
+            const date = new Date(entry.created_at);
+            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        });
+
+        const rawValues = data.feeds.map(entry => parseFloat(entry[`field${fieldNum}`]));
+        const values = rawValues.map(v => (v < 0 || v > 100 || isNaN(v)) ? null : v); // adjust bounds for humidity %
+
+        const ctx = document.getElementById('humidityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    spanGaps: true,
+                    borderColor: '#a970ff',
+                    backgroundColor: 'transparent',
+                    pointBackgroundColor: '#a970ff',
+                    pointRadius: 0.8,
+                    tension: 0.4,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.15)' },
+                        ticks: { 
+                            color: '#8a9bb0',
+                            maxTicksLimit: 15,
+                            autoSkip: true
+                        }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.15)' },
+                        ticks: { color: '#8a9bb0' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Humidity',
+                        color: '#cfd8e3',
+                        font: {
+                            size: 20,
+                            family: "'Poppins', sans-serif",
+                            weight: '500'
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    }
+                },
+            }
+        });
+    }
+
+    loadHumidityChart();
+
+    async function loadLampStatus(){
+        const channelID = "3407575";
+        const apiKey = "I8Y3MP890VBK6PAV";
+        const fieldNum = 3;
+
+        const response = await fetch(`https://api.thingspeak.com/channels/${channelID}/fields/${fieldNum}/last.json?api_key=${apiKey}`);
+        const data = await response.json();
+
+        const lampValue = parseFloat(data[`field${fieldNum}`]);
+        const bulbImg = document.getElementById('bulbImg');
+
+        if (!isNaN(lampValue) && lampValue > 0) {
+            bulbImg.src = 'bulb.png';
+        } else {
+            bulbImg.src = 'off.png';
+        }
+    }
+
+    loadLampStatus();
+    setInterval(loadLampStatus, 15000); // matches ThingSpeak update interval
+</script>
+
+</body>
+</html>
