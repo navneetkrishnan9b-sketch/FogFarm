@@ -20,13 +20,14 @@
 </head>
 <body>
     <div class="navbar">
-        <ul>
-            <li><a href="index.html"><div class="logo"><img src="FogFarm2.png"></div></a></li>
-            <li class="nav-right-group">
-                <a href="login.html">Farms</a>
-                <a href="login.html">Log in</a>
-            </li>
-        </ul>
+        <div class="nav-top">
+            <a href="index.html"><div class="logo"><img src="FogFarm2.png"></div></a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+        </div>
+        <div class="nav-right-group" id="navLinks">
+            <a href="login.html">Farms</a>
+            <a href="login.html">Log in</a>
+        </div>
     </div>
 
 
@@ -56,6 +57,13 @@
     </div>
 
 <script>
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-open');
+    });
+
     async function loadChart(){
         const channelID = "3407575";
         const apiKey = "I8Y3MP890VBK6PAV"; // remove this line + param below if channel is public
