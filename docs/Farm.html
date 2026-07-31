@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FogFarms</title>
+    <title>FogFarm</title>
     <link rel="stylesheet" href="styles2.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,6 +105,8 @@
             }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,   // <-- add this line
                 scales: {
                     x: {
                         grid: { color: 'rgba(255,255,255,0.15)' },
@@ -123,16 +125,14 @@
                     legend: { display: false },
                     title: {
                         display: true,
-                        text: 'Temperature',
+                        text: 'Temperature', // (or 'Humidity' in the other chart)
                         color: '#cfd8e3',
                         font: {
                             size: 20,
                             family: "'Poppins', sans-serif",
                             weight: '500'
                         },
-                        padding: {
-                            bottom: 20
-                        }
+                        padding: { bottom: 20 }
                     }
                 },
             }
@@ -187,6 +187,8 @@
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,   // <-- add this line
                 scales: {
                     x: {
                         grid: { color: 'rgba(255,255,255,0.15)' },
@@ -205,16 +207,14 @@
                     legend: { display: false },
                     title: {
                         display: true,
-                        text: 'Humidity',
+                        text: 'Temperature', // (or 'Humidity' in the other chart)
                         color: '#cfd8e3',
                         font: {
                             size: 20,
                             family: "'Poppins', sans-serif",
                             weight: '500'
                         },
-                        padding: {
-                            bottom: 20
-                        }
+                        padding: { bottom: 20 }
                     }
                 },
             }
